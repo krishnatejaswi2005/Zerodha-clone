@@ -1,0 +1,68 @@
+footer {
+	background-color: #f0f0f0;
+}
+#root {
+	font-family: "Plus Jakarta Sans", serif;
+}
+.resizeText {
+	font-size: 0.85rem;
+}
+
+/* Navbar Style */
+.logo {
+	width: 150px !important; /* Default size for desktop */
+	max-width: 100% !important; /* Ensure responsiveness */
+	height: auto !important; /* Maintain aspect ratio */
+}
+
+@media (max-width: 768px) {
+	.logo {
+		width: 120px !important; /* Resize for smaller screens */
+	}
+	.navbar-brand {
+		margin-right: auto !important; /* Prevent overlap */
+	}
+}
+
+/* Footer style */
+/* For screen sizes below 992px */
+@media (max-width: 768px) {
+	.logo-size {
+		width: 25%; /* Adjust this value to suit your design */
+	}
+}
+
+/* For screen sizes between 992px and 1200px */
+@media (min-width: 768px) and (max-width: 992px) {
+	.logo-size {
+		width: 65% !important; /* Keep the same size as for small screens */
+	}
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+	.logo-size {
+		width: 65% !important; /* Keep the same size as for small screens */
+	}
+}
+
+/* For screens larger than 1200px (optional) */
+@media (min-width: 1200px) {
+	.logo-size {
+		width: 45%; /* Adjust this value as per your design */
+	}
+}
+
+/* Support Hero */
+
+#supportHero a {
+	color: white;
+	font-size: 0.8rem;
+}
+
+#search {
+	width: 100%;
+	border-radius: 4px;
+	height: 20px;
+	border: none;
+	font-size: 0.8rem;
+	padding: 35px;
+}
