@@ -1,0 +1,96 @@
+/* New responsive container styles */
+.username-responsive {
+	margin-bottom: 1rem;
+}
+
+/* Section and Data containers for responsiveness */
+.section-responsive {
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+.data-responsive {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 1rem;
+}
+
+/* Styling for the first and second parts of data */
+.first-responsive {
+	flex: 1;
+	padding-right: 1rem;
+}
+
+.second-responsive {
+	flex: 1;
+	padding-left: 1rem;
+}
+
+/* Adjust font size and layout for smaller screens */
+.first-responsive h3 {
+	font-size: 1.25rem;
+}
+
+.second-responsive p {
+	font-size: 1rem;
+}
+
+/* Small screens (max-width: 768px) */
+@media (max-width: 768px) {
+	.username-responsive h6 {
+		font-size: 1rem;
+	}
+
+	.section-responsive {
+		padding: 0.5rem;
+	}
+
+	.data-responsive {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.first-responsive,
+	.second-responsive {
+		flex: none;
+		width: 100%;
+	}
+
+	.first-responsive h3 {
+		font-size: 1.1rem;
+	}
+
+	.second-responsive p {
+		font-size: 0.9rem;
+	}
+
+	/* Remove hr on small screens */
+	.section-responsive hr {
+		display: none;
+	}
+}
+
+/* Extra small screens (max-width: 480px) */
+@media (max-width: 480px) {
+	.username-responsive h6 {
+		font-size: 0.9rem;
+	}
+
+	.section-responsive p {
+		font-size: 0.9rem;
+	}
+
+	.first-responsive h3 {
+		font-size: 1rem;
+	}
+
+	.second-responsive p {
+		font-size: 0.8rem;
+	}
+
+	/* Remove hr on extra small screens */
+	.section-responsive hr {
+		display: none;
+	}
+}

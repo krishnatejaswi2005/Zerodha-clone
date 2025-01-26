@@ -1,0 +1,135 @@
+/* New responsive container styles */
+.watchlist-container-responsive {
+	width: 100%;
+	padding: 1rem;
+	box-sizing: border-box;
+}
+
+/* New search container with responsive behavior */
+.search-container-responsive {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+
+.search-responsive {
+	flex: 1;
+	padding: 0.5rem;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+/* New count styles for responsiveness */
+.counts-responsive {
+	margin-left: 1rem;
+	font-size: 1rem;
+}
+
+.list-responsive {
+	list-style: none;
+	padding: 0;
+}
+
+/* New item container styles */
+.item-responsive {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 1rem;
+	padding: 0.5rem;
+	cursor: pointer;
+}
+
+/* New item info section for responsiveness */
+.item-info-responsive {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.percent-responsive {
+	font-weight: bold;
+}
+
+.stock-responsive {
+	font-size: 1rem;
+}
+
+/* New hover/touch effect for actions (responsive) */
+.actions-responsive {
+	display: none;
+}
+
+li:hover .actions-responsive,
+li:focus-within .actions-responsive {
+	display: block;
+}
+
+/* New action buttons (Buy, Sell, Analytics, More) */
+.action-buttons-responsive {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.buy-responsive,
+.sell-responsive,
+.action-responsive,
+.more-responsive {
+	padding: 0.5rem;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	background-color: white;
+	cursor: pointer;
+}
+
+/* Tooltip styles for new classes */
+.MuiTooltip-tooltip {
+	font-size: 1rem;
+}
+
+/* Responsive styling for screens max-width 768px */
+@media (max-width: 768px) {
+	.search-container-responsive {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.search-responsive {
+		margin-bottom: 0.5rem;
+		width: 100%;
+	}
+
+	.list-responsive {
+		padding-left: 0;
+	}
+
+	.actions-responsive {
+		display: none;
+	}
+
+	li:focus-within .actions-responsive {
+		display: block;
+	}
+
+	.item-info-responsive {
+		display: block;
+		text-align: center;
+	}
+
+	.action-buttons-responsive {
+		flex-direction: column;
+		gap: 0.3rem;
+	}
+}
+
+/* Smaller devices max-width 480px */
+@media (max-width: 480px) {
+	.buy-responsive,
+	.sell-responsive,
+	.action-responsive,
+	.more-responsive {
+		font-size: 0.8rem;
+	}
+}

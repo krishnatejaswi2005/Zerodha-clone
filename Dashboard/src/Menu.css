@@ -83,6 +83,7 @@
 
 	.menus.open {
 		transform: translateY(0);
+		z-index: 2;
 	}
 
 	.menus ul {
@@ -144,6 +145,7 @@
 	.menus.open {
 		transform: translateY(0);
 		width: 100%;
+		z-index: 2;
 	}
 
 	.menus ul {
@@ -170,6 +172,7 @@
 	}
 	.menus.open {
 		width: 100%;
+		z-index: 2;
 	}
 }
 @media (max-width: 400px) {
@@ -186,5 +189,6 @@
 	}
 	.menus.open {
 		width: 10rem;
+		z-index: 2;
 	}
 }

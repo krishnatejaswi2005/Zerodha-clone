@@ -1,26 +1,27 @@
 import React from "react";
+import "./Summary.css";
 
 const Summary = () => {
 	return (
 		<>
-			<div className="username">
+			<div className="username username-responsive">
 				<h6>Hi, User!</h6>
 				<hr className="divider" />
 			</div>
 
-			<div className="section">
+			<div className="section section-responsive">
 				<span>
 					<p>Equity</p>
 				</span>
 
-				<div className="data">
-					<div className="first">
+				<div className="data data-responsive">
+					<div className="first first-responsive">
 						<h3>3.74k</h3>
 						<p>Margin available</p>
 					</div>
 					<hr />
 
-					<div className="second">
+					<div className="second second-responsive">
 						<p>
 							Margins used <span>0</span>
 						</p>
@@ -32,13 +33,13 @@ const Summary = () => {
 				<hr className="divider" />
 			</div>
 
-			<div className="section">
+			<div className="section section-responsive">
 				<span>
 					<p>Holdings (13)</p>
 				</span>
 
-				<div className="data">
-					<div className="first">
+				<div className="data data-responsive">
+					<div className="first first-responsive">
 						<h3 className="profit">
 							1.55k <small>+5.20%</small>
 						</h3>
@@ -46,7 +47,7 @@ const Summary = () => {
 					</div>
 					<hr />
 
-					<div className="second">
+					<div className="second second-responsive">
 						<p>
 							Current Value <span>31.43k</span>
 						</p>
