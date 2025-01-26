@@ -1,22 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./Funds.css";
+
 const Funds = () => {
 	return (
 		<>
-			<div className="funds">
-				<p>Instant, zero-cost fund transfers with UPI </p>
+			<div className="funds funds-responsive">
+				<p className="funds-text">Instant, zero-cost fund transfers with UPI</p>
 				<Link className="btn btn-green">Add funds</Link>
 				<Link className="btn btn-blue">Withdraw</Link>
 			</div>
 
-			<div className="row">
-				<div className="col">
+			<div className="row row-responsive">
+				<div className="col col-responsive">
 					<span>
 						<p>Equity</p>
 					</span>
 
-					<div className="table">
+					<div className="table table-responsive">
 						<div className="data">
 							<p>Available margin</p>
 							<p className="imp colored">4,043.10</p>
@@ -74,7 +76,7 @@ const Funds = () => {
 					</div>
 				</div>
 
-				<div className="col">
+				<div className="col col-responsive">
 					<div className="commodity">
 						<p>You don't have a commodity account</p>
 						<Link className="btn btn-blue">Open Account</Link>
