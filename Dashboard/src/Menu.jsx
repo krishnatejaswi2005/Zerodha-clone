@@ -1,27 +1,67 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+
+import "./Menu.css";
 
 const Menu = () => {
 	const [selectedMenu, setSelectedMenu] = useState(0);
-	const [IsProfileDropdown, setIsProfileDropdown] = useState(false);
+	const [isProfileDropdown, setIsProfileDropdown] = useState(false);
+	const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+
+	const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 560);
+
+	// Update state on window resize
+	useEffect(() => {
+		const handleResize = () => {
+			setIsScreenSmall(window.innerWidth <= 560);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	const handleMenuClick = (index) => {
 		setSelectedMenu(index);
+		setIsHamburgerOpen(false); // Close hamburger on menu click
 	};
 
 	const handleProfileClick = () => {
-		setIsProfileDropdown(!IsProfileDropdown);
+		setIsProfileDropdown(!isProfileDropdown);
+	};
+
+	const toggleHamburger = () => {
+		setIsHamburgerOpen(!isHamburgerOpen);
 	};
 
 	const menuClass = "menu";
 	const activeMenuClass = "menu selected";
+
 	return (
 		<div className="menu-container">
-			<img src="./logo.png" style={{ width: "50px" }} />
-			<div className="menus">
+			{/* Logo */}
+			<img
+				src="./logo.png"
+				className="logo"
+				style={{ width: "50px" }}
+				alt="Logo"
+			/>
+
+			{/* Hamburger Icon */}
+			<div className="hamburger" onClick={toggleHamburger}>
+				{isHamburgerOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+			</div>
+
+			{/* Menu Items */}
+			<div className={`menus ${isHamburgerOpen ? "open" : ""}`}>
 				<ul>
+					<div
+						className={isScreenSmall ? "profile" : "hidden"}
+						onClick={handleProfileClick}
+					>
+						<div className="avatar">ZU</div>
+						<p className="username">USERID</p>
+					</div>
 					<li>
 						<Link
 							to="/"
@@ -77,6 +117,7 @@ const Menu = () => {
 							</p>
 						</Link>
 					</li>
+
 					<li>
 						<Link
 							to="/apps"
@@ -89,11 +130,14 @@ const Menu = () => {
 						</Link>
 					</li>
 				</ul>
-				<hr />
-				<div className="profile" onClick={handleProfileClick}>
-					<div className="avatar">ZU</div>
-					<p className="username">USERID</p>
-				</div>
+			</div>
+			{/* Profile Section (will be outside the hamburger for larger screens) */}
+			<div
+				className={isScreenSmall ? "hidden" : "profile"}
+				onClick={handleProfileClick}
+			>
+				<div className="avatar">ZU</div>
+				<p className="username">USERID</p>
 			</div>
 		</div>
 	);

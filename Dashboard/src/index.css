@@ -298,7 +298,7 @@ hr {
 .profile {
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: flex-end;
 	margin-left: 20px;
 }
 
@@ -316,7 +316,7 @@ hr {
 	text-align: center;
 	display: flex;
 	background: rgb(252, 229, 252);
-	margin-right: 8px;
+	margin-right: 0px;
 }
 
 .profile .username {
@@ -578,7 +578,7 @@ hr {
 
 .indices-container {
 	flex-basis: 32%;
-	height: 100%;
+	height: auto;
 	padding: 10px 20px;
 	border-right: 1px solid rgb(224, 224, 224);
 	box-sizing: border-box;
