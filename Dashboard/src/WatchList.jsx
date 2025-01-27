@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardControlKeyIcon from "@mui/icons-material/KeyboardControlKey";
 import BarChartIcon from "@mui/icons-material/BarChart";
@@ -9,6 +9,34 @@ import { Tooltip } from "@mui/material";
 import { watchlist } from "./data/data";
 
 const WatchList = () => {
+	const [placeholder, setPlaceholder] = useState(
+		"Search eg:infy, bse, nifty fut weekly, gold mcx"
+	);
+
+	useEffect(() => {
+		const handleResize = () => {
+			const width = window.innerWidth;
+			if (width <= 1440 && width >= 768) {
+				setPlaceholder("Search");
+			} else if (width < 485) {
+				setPlaceholder("Search");
+			} else {
+				setPlaceholder("Search eg:infy, bse, nifty fut weekly, gold mcx");
+			}
+		};
+
+		// Initial resize check
+		handleResize();
+
+		// Add event listener on resize
+		window.addEventListener("resize", handleResize);
+
+		// Cleanup event listener on component unmount
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
 	return (
 		<div className="watchlist-container">
 			<div className="search-container">
@@ -16,10 +44,10 @@ const WatchList = () => {
 					type="text"
 					name="search"
 					id="search"
-					placeholder="Search eg:infy, bse, nifty fut weekly, gold mcx"
+					placeholder={placeholder}
 					className="search"
 				/>
-				<span className="counts"> {watchlist.length} / 50</span>
+				<span className="counts">{watchlist.length}/50</span>
 			</div>
 
 			<ul className="list">
@@ -43,8 +71,18 @@ const WatchListItem = ({ stock }) => {
 		setShowWatchListActions(false);
 	};
 
+	// const handleClick = () => {
+	// 	if (window.innerWidth <= 768) {
+	// 		setShowWatchListActions(!showWatchListActions);
+	// 	}
+	// };
+
 	return (
-		<li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+		<li
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+			// onClick={handleClick}
+		>
 			<div className="item">
 				<p className={stock.isDown ? "down" : "up"}>{stock.name}</p>
 				{showWatchListActions || (
@@ -59,7 +97,9 @@ const WatchListItem = ({ stock }) => {
 					</div>
 				)}
 			</div>
-			{showWatchListActions && <WatchListActions uid={stock.name} />}
+			{(showWatchListActions || window.innerWidth <= 768) && (
+				<WatchListActions uid={stock.name} />
+			)}
 		</li>
 	);
 };
