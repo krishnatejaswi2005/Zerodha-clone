@@ -1,10 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardControlKeyIcon from "@mui/icons-material/KeyboardControlKey";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Tooltip } from "@mui/material";
+
+import GeneralContext from "./GeneralContext";
 
 import { watchlist } from "./data/data";
 
@@ -105,10 +107,14 @@ const WatchListItem = ({ stock }) => {
 };
 
 const WatchListActions = ({ uid }) => {
+	const generalContext = useContext(GeneralContext);
+	const handleBuyClick = () => {
+		generalContext.openBuyWindow(uid);
+	};
 	return (
 		<span className="actions">
 			<span className="action-buttons">
-				<Tooltip title="Buy (B)" arrow placement="top">
+				<Tooltip title="Buy (B)" arrow placement="top" onClick={handleBuyClick}>
 					<button className="buy">Buy</button>
 				</Tooltip>
 				<Tooltip title="Sell (S)" arrow placement="top">
