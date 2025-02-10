@@ -179,9 +179,12 @@
 .btn-blue {
 	background: #4184f3;
 }
+.btn-red {
+	background: #ff5722;
+}
 
-.btn-blue:hover {
-	background: #74a7fa;
+.btn-red:hover {
+	background: #f47047;
 }
 
 .btn-grey:hover {
