@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
+import { useCookies } from "react-cookie";
+
 import "./Menu.css";
 
 const Menu = () => {
@@ -10,6 +12,8 @@ const Menu = () => {
 	const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
 	const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 560);
+
+	const [cookies, removeCookie] = useCookies(["token"]);
 
 	// Update state on window resize
 	useEffect(() => {
@@ -32,6 +36,10 @@ const Menu = () => {
 
 	const toggleHamburger = () => {
 		setIsHamburgerOpen(!isHamburgerOpen);
+	};
+	const Logout = () => {
+		removeCookie("token");
+		window.location.href = "http://localhost:5173/";
 	};
 
 	const menuClass = "menu";
@@ -126,6 +134,20 @@ const Menu = () => {
 						>
 							<p className={selectedMenu === 5 ? activeMenuClass : menuClass}>
 								Apps
+							</p>
+						</Link>
+					</li>
+					<li>
+						<Link
+							to=""
+							onClick={() => {
+								handleMenuClick(6);
+								Logout();
+							}}
+							style={{ textDecoration: "none" }}
+						>
+							<p className={selectedMenu === 6 ? activeMenuClass : menuClass}>
+								Logout
 							</p>
 						</Link>
 					</li>

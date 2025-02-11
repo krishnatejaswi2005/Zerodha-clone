@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from "react";
 
-import axios from "axios";
+import axios, { all } from "axios";
 
 // import { holdings } from "./data/data";
 
 import "./Holdings.css";
+import { VerticalBarChart } from "./VerticalBarChart";
 
 const Holdings = () => {
 	const [allHoldings, setAllHoldings] = useState([]);
+
+	const labels = allHoldings.map((subArray) => subArray["name"]);
+	const data = {
+		labels,
+		datasets: [
+			{
+				label: "Stock Price",
+				data: allHoldings.map((stock) => stock.price),
+				backgroundColor: "rgba(255, 99, 132, 0.5)",
+			},
+		],
+	};
+
 	useEffect(() => {
 		axios.get("http://localhost:3002/getHoldings").then((res) => {
 			setAllHoldings(res.data);
@@ -76,6 +90,7 @@ const Holdings = () => {
 					<p>P&L</p>
 				</div>
 			</div>
+			<VerticalBarChart data={data} />
 		</>
 	);
 };

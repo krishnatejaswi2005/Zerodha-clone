@@ -2,6 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 
+const cookieParser = require("cookie-parser");
+const authRoute = require("./routes/AuthRoute");
+
 const cors = require("cors");
 
 const bodyParser = require("body-parser");
@@ -18,7 +21,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+app.use(cookieParser());
+
 // app.get("/addPositions", (req, res) => {
+
 // 	let data = [
 // 		{
 // 			product: "CNC",
@@ -183,6 +189,8 @@ app.use(bodyParser.json());
 // 	res.send("Data Added");
 // });
 
+app.use("/", authRoute);
+
 app.get("/getHoldings", async (req, res) => {
 	const holdings = await HoldingsModel.find({});
 	res.json(holdings);
@@ -190,6 +198,10 @@ app.get("/getHoldings", async (req, res) => {
 app.get("/getPositions", async (req, res) => {
 	const positions = await PositionsModel.find({});
 	res.json(positions);
+});
+app.get("/getOrders", async (req, res) => {
+	const orders = await OrdersModel.find({});
+	res.json(orders);
 });
 
 app.post("/newOrder", async (req, res) => {

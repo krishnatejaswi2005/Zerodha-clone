@@ -14,7 +14,13 @@ function Hero() {
 						Online platform for investing in stocks, derivatives, mutual funds
 						and more
 					</p>
-					<button type="button" className="btn btn-primary px-5 py-2">
+					<button
+						type="button"
+						onClick={() => {
+							window.location.href = "http://localhost:5173/signup";
+						}}
+						className="btn btn-primary px-5 py-2"
+					>
 						Signup Now
 					</button>
 				</div>

@@ -8,5 +8,6 @@ export default defineConfig({
 		hmr: {
 			overlay: false, // Disables the error overlay
 		},
+		allowedHosts: ["6fe8-103-161-31-178.ngrok-free.app"], // Add your host here
 	},
 });
