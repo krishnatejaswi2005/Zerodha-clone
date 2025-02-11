@@ -1,11 +1,11 @@
 import React from "react";
 import "./Summary.css";
 
-const Summary = () => {
+const Summary = ({ username }) => {
 	return (
 		<>
 			<div className="username username-responsive">
-				<h6>Hi, User!</h6>
+				<h6>Hi, {username}!</h6>
 				<hr className="divider" />
 			</div>
 

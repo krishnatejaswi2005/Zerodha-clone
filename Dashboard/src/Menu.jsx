@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
+
+import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import { useCookies } from "react-cookie";
+import axios from "axios";
 
 import "./Menu.css";
 
-const Menu = () => {
+const Menu = ({ username }) => {
 	const [selectedMenu, setSelectedMenu] = useState(0);
 	const [isProfileDropdown, setIsProfileDropdown] = useState(false);
 	const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
@@ -14,6 +17,19 @@ const Menu = () => {
 	const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 560);
 
 	const [cookies, removeCookie] = useCookies(["token"]);
+
+	// const [username, setUsername] = useState("");
+
+	// const token = cookies.token;
+	// const decodedToken = jwtDecode(token, { complete: true });
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get(`http://localhost:3002/getUsername/${decodedToken.id}`)
+	// 		.then((result) => {
+	// 			setUsername(result.data.username);
+	// 		});
+	// }, []);
 
 	// Update state on window resize
 	useEffect(() => {
@@ -67,8 +83,10 @@ const Menu = () => {
 						className={isScreenSmall ? "profile" : "hidden"}
 						onClick={handleProfileClick}
 					>
-						<div className="avatar">ZU</div>
-						<p className="username">USERID</p>
+						<div className="avatar">
+							<i className="fa-regular fa-user"></i>
+						</div>
+						<p className="username">{username}</p>
 					</div>
 					<li>
 						<Link
@@ -158,8 +176,10 @@ const Menu = () => {
 				className={isScreenSmall ? "hidden" : "profile"}
 				onClick={handleProfileClick}
 			>
-				<div className="avatar">ZU</div>
-				<p className="username">USERID</p>
+				<div className="avatar">
+					<i className="fa-regular fa-user"></i>
+				</div>
+				<p className="username">{username}</p>
 			</div>
 		</div>
 	);

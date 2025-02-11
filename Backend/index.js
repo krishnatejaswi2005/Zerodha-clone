@@ -13,6 +13,8 @@ const { HoldingsModel } = require("../Backend/model/HoldingsModel");
 const { PositionsModel } = require("../Backend/model//PositionsModel");
 const { OrdersModel } = require("../Backend/model/OrdersModel");
 
+const User = require("../Backend/model/UserModel");
+
 const PORT = process.env.PORT || 3002;
 const URL = process.env.MONGO_URL;
 
@@ -222,6 +224,11 @@ app.post("/newOrder", async (req, res) => {
 		console.error("Error saving order:", error);
 		res.status(500).json({ error: error.message });
 	}
+});
+
+app.get("/getUsername/:id", async (req, res) => {
+	const result = await User.findById(req.params.id);
+	res.json(result);
 });
 
 app.listen(PORT, () => {

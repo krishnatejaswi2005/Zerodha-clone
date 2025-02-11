@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { jwtDecode } from "jwt-decode";
+
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -12,6 +14,18 @@ const Home = () => {
 	const navigate = useNavigate();
 	const [cookies, removeCookie] = useCookies([]);
 	const [username, setUsername] = useState("");
+
+	const token = cookies.token;
+	const decodedToken = jwtDecode(token, { complete: true });
+
+	useEffect(() => {
+		axios
+			.get(`http://localhost:3002/getUsername/${decodedToken.id}`)
+			.then((result) => {
+				setUsername(result.data.username);
+			});
+	}, []);
+
 	useEffect(() => {
 		const verifyCookie = async () => {
 			if (!cookies.token) {
@@ -33,14 +47,11 @@ const Home = () => {
 		};
 		verifyCookie();
 	}, [cookies, navigate, removeCookie]);
-	const Logout = () => {
-		removeCookie("token");
-		navigate("http://localhost:5173/signup");
-	};
+
 	return (
 		<>
-			<TopBar />
-			<Dashboard />
+			<TopBar username={username} />
+			<Dashboard username={username} />
 		</>
 		// <>
 		// 	<div>
