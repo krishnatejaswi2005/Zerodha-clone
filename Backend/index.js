@@ -202,7 +202,9 @@ app.get("/getPositions", async (req, res) => {
 	res.json(positions);
 });
 app.get("/getOrders", async (req, res) => {
-	const orders = await OrdersModel.find({});
+	const userId = req.query.userId;
+
+	const orders = await OrdersModel.find({ userId });
 	res.json(orders);
 });
 
@@ -213,6 +215,7 @@ app.post("/newOrder", async (req, res) => {
 			qty: req.body.qty,
 			price: req.body.price,
 			mode: req.body.mode,
+			userId: req.body.userId, // Get the userId from the authenticated user
 		});
 
 		const savedOrder = await order.save();

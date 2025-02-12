@@ -3,11 +3,18 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
+import { jwtDecode } from "jwt-decode";
+import { useCookies } from "react-cookie";
+
 import "./BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid }) => {
 	const [stockQuantity, setStockQuantity] = useState();
 	const [stockPrice, setStockPrice] = useState(0.0);
+
+	const [cookies, removeCookie] = useCookies(["token"]);
+	const token = cookies.token;
+	const decodedToken = jwtDecode(token, { complete: true });
 
 	// ✅ Get closeBuyWindow from context
 	const { closeBuyWindow } = useContext(GeneralContext);
@@ -19,6 +26,7 @@ const BuyActionWindow = ({ uid }) => {
 				qty: stockQuantity,
 				price: stockPrice,
 				mode: "BUY",
+				userId: decodedToken.id,
 			});
 		} catch (error) {
 			console.error("Error placing order:", error);

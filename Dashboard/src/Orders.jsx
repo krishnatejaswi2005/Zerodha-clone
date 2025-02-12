@@ -2,15 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+import { jwtDecode } from "jwt-decode";
+import { useCookies } from "react-cookie";
+
 import "./Orders.css";
 import "./Positions.css";
 
 const Orders = () => {
+	const [cookies, removeCookie] = useCookies(["token"]);
+	const token = cookies.token;
+	const decodedToken = jwtDecode(token, { complete: true });
+
 	const [allOrders, setAllOrders] = useState([]);
 	useEffect(() => {
-		axios.get("http://localhost:3002/getOrders").then((res) => {
-			setAllOrders(res.data);
-		});
+		axios
+			.get(`http://localhost:3002/getOrders?userId=${decodedToken.id}`)
+			.then((res) => {
+				setAllOrders(res.data);
+			});
 	}, []);
 	if (allOrders.length === 0) {
 		return (

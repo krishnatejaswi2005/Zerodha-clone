@@ -12,7 +12,7 @@ import TopBar from "./TopBar";
 
 const Home = () => {
 	const navigate = useNavigate();
-	const [cookies, removeCookie] = useCookies([]);
+	const [cookies, removeCookie] = useCookies(["token"]);
 	const [username, setUsername] = useState("");
 
 	const token = cookies.token;
