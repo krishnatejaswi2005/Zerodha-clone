@@ -104,12 +104,6 @@ const WatchListItem = ({ stock }) => {
 		setShowWatchListActions(false);
 	};
 
-	// const handleClick = () => {
-	// 	if (window.innerWidth <= 768) {
-	// 		setShowWatchListActions(!showWatchListActions);
-	// 	}
-	// };
-
 	return (
 		<li
 			onMouseEnter={handleMouseEnter}

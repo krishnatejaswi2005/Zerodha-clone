@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { jwtDecode } from "jwt-decode";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 
 import { useCookies } from "react-cookie";
-import axios from "axios";
 
 import "./Menu.css";
 
@@ -17,19 +15,6 @@ const Menu = ({ username }) => {
 	const [isScreenSmall, setIsScreenSmall] = useState(window.innerWidth <= 560);
 
 	const [cookies, removeCookie] = useCookies(["token"]);
-
-	// const [username, setUsername] = useState("");
-
-	// const token = cookies.token;
-	// const decodedToken = jwtDecode(token, { complete: true });
-
-	// useEffect(() => {
-	// 	axios
-	// 		.get(`http://localhost:3002/getUsername/${decodedToken.id}`)
-	// 		.then((result) => {
-	// 			setUsername(result.data.username);
-	// 		});
-	// }, []);
 
 	// Update state on window resize
 	useEffect(() => {

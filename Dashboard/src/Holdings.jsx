@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import axios, { all } from "axios";
 
-// import { holdings } from "./data/data";
-
 import "./Holdings.css";
 import { VerticalBarChart } from "./VerticalBarChart";
 

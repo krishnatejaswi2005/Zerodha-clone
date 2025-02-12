@@ -53,16 +53,6 @@ const Home = () => {
 			<TopBar username={username} />
 			<Dashboard username={username} />
 		</>
-		// <>
-		// 	<div>
-		// 		<h4>
-		// 			{" "}
-		// 			Welcome <span>{username}</span>
-		// 		</h4>
-		// 		<button onClick={Logout}>LOGOUT</button>
-		// 	</div>
-		// 	<ToastContainer />
-		// </>
 	);
 };
 
