@@ -20,7 +20,16 @@ const URL = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors());
+app.use(
+	cors({
+		origin: [
+			"", // Second frontend
+		],
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+		credentials: true, // Allow cookies/session sharing
+	})
+);
+
 app.use(bodyParser.json());
 
 app.use(cookieParser());
