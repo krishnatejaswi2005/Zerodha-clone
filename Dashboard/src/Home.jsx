@@ -36,7 +36,7 @@ const Home = () => {
 				window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 			}
 			const { data } = await axios.post(
-				"https://zerodha-clone-backend-dun.vercel.app",
+				"https://zerodha-clone-backend-ve49.onrender.com",
 				{},
 				{ withCredentials: true }
 			);
