@@ -24,7 +24,7 @@ const SellActionWindow = ({ uid }) => {
 	const handleSellClick = async () => {
 		try {
 			await axios.post(
-				"https://zerodha-clone-backend-dun.vercel.app/newOrder",
+				"https://zerodha-clone-backend-ve49.onrender.com/newOrder",
 				{
 					name: uid,
 					qty: stockQuantity,

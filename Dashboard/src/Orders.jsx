@@ -19,7 +19,7 @@ const Orders = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://zerodha-clone-backend-dun.vercel.app/getOrders?userId=${decodedToken.id}`
+				`https://zerodha-clone-backend-ve49.onrender.com/getOrders?userId=${decodedToken.id}`
 			)
 			.then((res) => {
 				setAllOrders(res.data);

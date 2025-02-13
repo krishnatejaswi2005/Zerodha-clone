@@ -23,7 +23,7 @@ const Home = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://zerodha-clone-backend-dun.vercel.app/getUsername/${decodedToken.id}`
+				`https://zerodha-clone-backend-ve49.onrender.com/getUsername/${decodedToken.id}`
 			)
 			.then((result) => {
 				setUsername(result.data.username);
