@@ -18,8 +18,8 @@ const Home = () => {
 	const [username, setUsername] = useState("");
 
 	const token = cookies.token;
-	const decodedToken = jwtDecode(token, { complete: true });
-
+	const decodedToken =
+		token?.toString() && jwtDecode(token, { complete: true });
 	useEffect(() => {
 		axios
 			.get(
