@@ -21,16 +21,13 @@ const SellActionWindow = ({ uid }) => {
 
 	const handleSellClick = async () => {
 		try {
-			await axios.post(
-				"https://zerodha-clone-backend-ruby.vercel.app/newOrder",
-				{
-					name: uid,
-					qty: stockQuantity,
-					price: stockPrice,
-					mode: "SELL",
-					userId: decodedToken.id,
-				}
-			);
+			await axios.post("https://backend-sepia-mu.vercel.app/newOrder", {
+				name: uid,
+				qty: stockQuantity,
+				price: stockPrice,
+				mode: "SELL",
+				userId: decodedToken.id,
+			});
 		} catch (error) {
 			console.error("Error placing order:", error);
 		}

@@ -8,7 +8,7 @@ const Positions = () => {
 	const [allPositions, setAllPositions] = useState([]);
 	useEffect(() => {
 		axios
-			.get("https://zerodha-clone-backend-ruby.vercel.app/getPositions")
+			.get("https://backend-sepia-mu.vercel.app/getPositions")
 			.then((res) => {
 				setAllPositions(res.data);
 			});

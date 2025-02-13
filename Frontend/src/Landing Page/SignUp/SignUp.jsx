@@ -31,7 +31,7 @@ const Signup = () => {
 		e.preventDefault();
 		try {
 			const { data } = await axios.post(
-				"https://zerodha-clone-backend-ruby.vercel.app/signup",
+				"https://backend-sepia-mu.vercel.app/signup",
 				{
 					...inputValue,
 				},

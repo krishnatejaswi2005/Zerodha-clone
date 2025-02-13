@@ -29,7 +29,7 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			const { data } = await axios.post(
-				"https://zerodha-clone-backend-ruby.vercel.app/login",
+				"https://backend-sepia-mu.vercel.app/login",
 				{
 					...inputValue,
 				},
