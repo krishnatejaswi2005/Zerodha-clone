@@ -21,7 +21,7 @@ const Holdings = () => {
 	};
 
 	useEffect(() => {
-		axios.get("https://backend-sepia-mu.vercel.app/getHoldings").then((res) => {
+		axios.get("http://localhost:3002/getHoldings").then((res) => {
 			setAllHoldings(res.data);
 		});
 	}, []);

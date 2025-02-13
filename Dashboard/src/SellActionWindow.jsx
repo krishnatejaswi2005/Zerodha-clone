@@ -21,7 +21,7 @@ const SellActionWindow = ({ uid }) => {
 
 	const handleSellClick = async () => {
 		try {
-			await axios.post("https://backend-sepia-mu.vercel.app/newOrder", {
+			await axios.post("http://localhost:3002/newOrder", {
 				name: uid,
 				qty: stockQuantity,
 				price: stockPrice,

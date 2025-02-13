@@ -16,9 +16,7 @@ const Orders = () => {
 	const [allOrders, setAllOrders] = useState([]);
 	useEffect(() => {
 		axios
-			.get(
-				`https://backend-sepia-mu.vercel.app/getOrders?userId=${decodedToken.id}`
-			)
+			.get(`http://localhost:3002/getOrders?userId=${decodedToken.id}`)
 			.then((res) => {
 				setAllOrders(res.data);
 			});

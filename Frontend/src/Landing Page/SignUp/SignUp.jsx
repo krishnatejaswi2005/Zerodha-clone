@@ -31,7 +31,7 @@ const Signup = () => {
 		e.preventDefault();
 		try {
 			const { data } = await axios.post(
-				"https://backend-sepia-mu.vercel.app/signup",
+				"http://localhost:3002/signup",
 				{
 					...inputValue,
 				},
@@ -41,7 +41,7 @@ const Signup = () => {
 			if (success) {
 				handleSuccess(message);
 				setTimeout(() => {
-					window.location.href = "https://zerodha-clonedashboard.vercel.app/";
+					window.location.href = "http://localhost:5174/";
 				}, 1000);
 			} else {
 				handleError(message);

@@ -7,11 +7,9 @@ import "./Positions.css";
 const Positions = () => {
 	const [allPositions, setAllPositions] = useState([]);
 	useEffect(() => {
-		axios
-			.get("https://backend-sepia-mu.vercel.app/getPositions")
-			.then((res) => {
-				setAllPositions(res.data);
-			});
+		axios.get("http://localhost:3002/getPositions").then((res) => {
+			setAllPositions(res.data);
+		});
 	}, []);
 
 	return (
