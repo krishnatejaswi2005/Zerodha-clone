@@ -16,10 +16,16 @@ const Home = () => {
 	const navigate = useNavigate();
 	const [cookies, removeCookie] = useCookies(["token"]);
 	const [username, setUsername] = useState("");
+	const [decodedToken, setDecodedToken] = useState(null);
 
-	const token = cookies.token;
-	const decodedToken =
-		token?.toString() && jwtDecode(token, { complete: true });
+	useEffect(() => {
+		const token = cookies.token;
+		if (token && typeof token === "string") {
+			const decoded = jwtDecode(token, { complete: true });
+			setDecodedToken(decoded);
+		}
+	}, [cookies.token]);
+
 	useEffect(() => {
 		axios
 			.get(
