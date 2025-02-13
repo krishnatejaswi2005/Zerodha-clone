@@ -12,7 +12,8 @@ function OpenAccount() {
 					<button
 						type="button"
 						onClick={() => {
-							window.location.href = "http://localhost:5173/signup";
+							window.location.href =
+								"https://zerodha-clone-amber.vercel.app/signup";
 						}}
 						className="btn btn-primary px-5 py-2"
 					>

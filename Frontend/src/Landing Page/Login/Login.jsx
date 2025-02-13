@@ -29,7 +29,7 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			const { data } = await axios.post(
-				"http://localhost:3002/login",
+				"https://zerodha-clone-backend-ruby.vercel.app/login",
 				{
 					...inputValue,
 				},
@@ -40,7 +40,7 @@ const Login = () => {
 			if (success) {
 				handleSuccess(message);
 				setTimeout(() => {
-					window.location.href = "http://localhost:5174/";
+					window.location.href = "https://zerodha-clonedashboard.vercel.app/";
 				}, 1000);
 			} else {
 				handleError(message);

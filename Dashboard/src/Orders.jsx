@@ -16,7 +16,9 @@ const Orders = () => {
 	const [allOrders, setAllOrders] = useState([]);
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3002/getOrders?userId=${decodedToken.id}`)
+			.get(
+				`https://zerodha-clone-backend-ruby.vercel.app/getOrders?userId=${decodedToken.id}`
+			)
 			.then((res) => {
 				setAllOrders(res.data);
 			});

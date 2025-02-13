@@ -20,7 +20,9 @@ const Home = () => {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3002/getUsername/${decodedToken.id}`)
+			.get(
+				`https://zerodha-clone-backend-ruby.vercel.app/getUsername/${decodedToken.id}`
+			)
 			.then((result) => {
 				setUsername(result.data.username);
 			});
@@ -29,10 +31,10 @@ const Home = () => {
 	useEffect(() => {
 		const verifyCookie = async () => {
 			if (!cookies.token) {
-				window.location.href = "http://localhost:5173/login";
+				window.location.href = "https://zerodha-clone-amber.vercel.app/login";
 			}
 			const { data } = await axios.post(
-				"http://localhost:3002",
+				"https://zerodha-clone-backend-ruby.vercel.app",
 				{},
 				{ withCredentials: true }
 			);
@@ -43,7 +45,8 @@ const Home = () => {
 						position: "top-right",
 				  })
 				: (removeCookie("token"),
-				  (window.location.href = "http://localhost:5173/login"));
+				  (window.location.href =
+						"https://zerodha-clone-amber.vercel.app/login"));
 		};
 		verifyCookie();
 	}, [cookies, navigate, removeCookie]);

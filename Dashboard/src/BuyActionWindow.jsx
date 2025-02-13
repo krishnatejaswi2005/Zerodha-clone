@@ -21,13 +21,16 @@ const BuyActionWindow = ({ uid }) => {
 
 	const handleBuyClick = async () => {
 		try {
-			await axios.post("http://localhost:3002/newOrder", {
-				name: uid,
-				qty: stockQuantity,
-				price: stockPrice,
-				mode: "BUY",
-				userId: decodedToken.id,
-			});
+			await axios.post(
+				"https://zerodha-clone-backend-ruby.vercel.app/newOrder",
+				{
+					name: uid,
+					qty: stockQuantity,
+					price: stockPrice,
+					mode: "BUY",
+					userId: decodedToken.id,
+				}
+			);
 		} catch (error) {
 			console.error("Error placing order:", error);
 		}
