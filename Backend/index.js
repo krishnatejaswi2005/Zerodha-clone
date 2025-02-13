@@ -23,12 +23,13 @@ const app = express();
 app.use(
 	cors({
 		origin: [
-			"*", // Second frontend
+			"https://zerodha-clone-tau.vercel.app",
+			"https://zerodha-clonedashboard.vercel.app", // Second frontend
 		],
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: true,
 		preflightContinue: true,
-		allowedHeaders["content-type"] // Allow cookies/session sharing
+		allowedHeaders: ["Content-Type", "Authorization"], // Allow cookies/session sharing
 	})
 );
 
