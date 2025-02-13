@@ -6,6 +6,8 @@ import "./Holdings.css";
 import { VerticalBarChart } from "./VerticalBarChart";
 
 const Holdings = () => {
+	axios.defaults.withCredentials = true;
+
 	const [allHoldings, setAllHoldings] = useState([]);
 
 	const labels = allHoldings.map((subArray) => subArray["name"]);

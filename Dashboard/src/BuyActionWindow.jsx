@@ -9,6 +9,8 @@ import { useCookies } from "react-cookie";
 import "./BuyActionWindow.css";
 
 const BuyActionWindow = ({ uid }) => {
+	axios.defaults.withCredentials = true;
+
 	const [stockQuantity, setStockQuantity] = useState();
 	const [stockPrice, setStockPrice] = useState(0.0);
 

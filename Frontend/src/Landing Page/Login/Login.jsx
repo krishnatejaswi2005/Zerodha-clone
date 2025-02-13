@@ -3,6 +3,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
+	axios.defaults.withCredentials = true;
+
 	const [inputValue, setInputValue] = useState({
 		email: "",
 		password: "",

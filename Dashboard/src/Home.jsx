@@ -11,6 +11,8 @@ import Dashboard from "./Dashboard";
 import TopBar from "./TopBar";
 
 const Home = () => {
+	axios.defaults.withCredentials = true;
+
 	const navigate = useNavigate();
 	const [cookies, removeCookie] = useCookies(["token"]);
 	const [username, setUsername] = useState("");

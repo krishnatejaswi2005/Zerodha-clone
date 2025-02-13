@@ -9,6 +9,8 @@ import "./Orders.css";
 import "./Positions.css";
 
 const Orders = () => {
+	axios.defaults.withCredentials = true;
+
 	const [cookies, removeCookie] = useCookies(["token"]);
 	const token = cookies.token;
 	const decodedToken = jwtDecode(token, { complete: true });
