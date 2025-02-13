@@ -24,7 +24,7 @@ app.use(
 	cors({
 		origin: [
 			"https://zerodha-clone-tau.vercel.app",
-			"https://zerodha-clonedashboard.vercel.app/", // Second frontend
+			"https://zerodha-clonedashboard.vercel.app", // Second frontend
 		],
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: true, // Allow cookies/session sharing
