@@ -26,7 +26,9 @@ app.use(
 			"*", // Second frontend
 		],
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials: true, // Allow cookies/session sharing
+		credentials: true,
+		preflightContinue: true,
+		allowedHeaders["content-type"] // Allow cookies/session sharing
 	})
 );
 
