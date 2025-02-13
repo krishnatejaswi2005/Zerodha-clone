@@ -1,18 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/AuthRoute");
-
 const cors = require("cors");
-
 const bodyParser = require("body-parser");
 
 const { HoldingsModel } = require("../Backend/model/HoldingsModel");
-const { PositionsModel } = require("../Backend/model//PositionsModel");
+const { PositionsModel } = require("../Backend/model/PositionsModel");
 const { OrdersModel } = require("../Backend/model/OrdersModel");
-
 const User = require("../Backend/model/UserModel");
 
 const PORT = process.env.PORT || 3002;
@@ -20,38 +16,52 @@ const URL = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(
-	cors({
-		origin: [
-			"https://zerodha-clone-tau.vercel.app",
-			"https://zerodha-clonedashboard.vercel.app", // Second frontend
-		],
-		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials: true, // Allow cookies/session sharing
-	})
-);
+// ✅ CORS Middleware
+const corsOptions = {
+	origin: [
+		"https://zerodha-clone-tau.vercel.app",
+		"https://zerodha-clonedashboard.vercel.app",
+	],
+	methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+	credentials: true,
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Preflight requests
 
 app.use(bodyParser.json());
-
 app.use(cookieParser());
 
-app.options("*", cors());
+// ✅ Global Middleware to Set Headers
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", corsOptions.origin);
+	res.header(
+		"Access-Control-Allow-Methods",
+		"GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS"
+	);
+	res.header(
+		"Access-Control-Allow-Headers",
+		"Origin, X-Requested-With, Content-Type, Accept, Authorization"
+	);
+	res.header("Access-Control-Allow-Credentials", "true");
+	next();
+});
 
 app.use("/", authRoute);
 
 app.get("/getHoldings", async (req, res) => {
 	const holdings = await HoldingsModel.find({});
-	res.json(holdings);
+	res.status(200).json(holdings);
 });
+
 app.get("/getPositions", async (req, res) => {
 	const positions = await PositionsModel.find({});
-	res.json(positions);
+	res.status(200).json(positions);
 });
+
 app.get("/getOrders", async (req, res) => {
 	const userId = req.query.userId;
-
 	const orders = await OrdersModel.find({ userId });
-	res.json(orders);
+	res.status(200).json(orders);
 });
 
 app.post("/newOrder", async (req, res) => {
@@ -61,11 +71,9 @@ app.post("/newOrder", async (req, res) => {
 			qty: req.body.qty,
 			price: req.body.price,
 			mode: req.body.mode,
-			userId: req.body.userId, // Get the userId from the authenticated user
+			userId: req.body.userId,
 		});
-
 		const savedOrder = await order.save();
-
 		res
 			.status(201)
 			.json({ message: "Order saved successfully", order: savedOrder });
@@ -77,12 +85,18 @@ app.post("/newOrder", async (req, res) => {
 
 app.get("/getUsername/:id", async (req, res) => {
 	const result = await User.findById(req.params.id);
-	res.json(result);
+	res.status(200).json(result);
 });
 
-app.listen(PORT, () => {
-	console.log("Server is running");
-
-	mongoose.connect(URL);
-	console.log("DB Connected");
-});
+// ✅ Ensure Database Connection Before Starting Server
+mongoose
+	.connect(URL, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then(() => {
+		console.log("DB Connected");
+		app.listen(PORT, () => {
+			console.log(`Server running on port ${PORT}`);
+		});
+	})
+	.catch((err) => {
+		console.error("DB Connection Error:", err);
+	});
