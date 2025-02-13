@@ -23,7 +23,7 @@ const app = express();
 app.use(
 	cors({
 		origin: [
-			"", // Second frontend
+			"https://zerodha-clone-tau.vercel.app", // Second frontend
 		],
 		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 		credentials: true, // Allow cookies/session sharing
