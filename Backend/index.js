@@ -35,6 +35,8 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
+app.options("*", cors());
+
 app.use("/", authRoute);
 
 app.get("/getHoldings", async (req, res) => {
