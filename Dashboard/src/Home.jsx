@@ -20,7 +20,9 @@ const Home = () => {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:3002/getUsername/${decodedToken.id}`)
+			.get(
+				`https://zerodha-clone-backend-dun.vercel.app/getUsername/${decodedToken.id}`
+			)
 			.then((result) => {
 				setUsername(result.data.username);
 			});
@@ -32,7 +34,7 @@ const Home = () => {
 				window.location.href = "http://localhost:5173/login";
 			}
 			const { data } = await axios.post(
-				"http://localhost:3002",
+				"https://zerodha-clone-backend-dun.vercel.app",
 				{},
 				{ withCredentials: true }
 			);

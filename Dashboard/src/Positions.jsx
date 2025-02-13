@@ -7,9 +7,11 @@ import "./Positions.css";
 const Positions = () => {
 	const [allPositions, setAllPositions] = useState([]);
 	useEffect(() => {
-		axios.get("http://localhost:3002/getPositions").then((res) => {
-			setAllPositions(res.data);
-		});
+		axios
+			.get("https://zerodha-clone-backend-dun.vercel.app/getPositions")
+			.then((res) => {
+				setAllPositions(res.data);
+			});
 	}, []);
 
 	return (
