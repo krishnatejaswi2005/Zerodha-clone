@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 function OpenAccount() {
 	return (
 		<div className="container w-100 mx-auto mb-5 pb-4 mt-5 pt-4">
