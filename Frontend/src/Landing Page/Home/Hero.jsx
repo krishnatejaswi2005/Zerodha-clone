@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 function Hero() {
 	return (
 		<div className="container w-100 mx-auto mb-5">
@@ -14,16 +16,11 @@ function Hero() {
 						Online platform for investing in stocks, derivatives, mutual funds
 						and more
 					</p>
-					<button
-						type="button"
-						onClick={() => {
-							window.location.href =
-								"https://zerodha-clone-tau.vercel.app/signup";
-						}}
-						className="btn btn-primary px-5 py-2"
-					>
-						Signup Now
-					</button>
+					<Link to="/signup">
+						<button type="button" className="btn btn-primary px-5 py-2">
+							Signup Now
+						</button>
+					</Link>
 				</div>
 			</div>
 		</div>
