@@ -20,17 +20,11 @@ const URL = process.env.MONGO_URL;
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173"]; // replace with your frontend domain
+const allowedOrigins = ["http://localhost:5173"];
 
 app.use(
 	cors({
-		origin: (origin, callback) => {
-			if (allowedOrigins.includes(origin)) {
-				callback(null, true);
-			} else {
-				callback(new Error("Not allowed by CORS"));
-			}
-		},
+		origin: allowedOrigins,
 		credentials: true,
 	})
 );
