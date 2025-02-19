@@ -40,7 +40,7 @@ const Menu = ({ username }) => {
 	};
 	const Logout = () => {
 		removeCookie("token");
-		window.location.href = "https://zerodha-clone-tau.vercel.app/";
+		window.location.href = "http://localhost:5173/";
 	};
 
 	const menuClass = "menu";

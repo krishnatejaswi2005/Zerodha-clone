@@ -34,7 +34,7 @@ const Home = () => {
 	useEffect(() => {
 		const verifyCookie = async () => {
 			if (!cookies.token) {
-				window.location.href = "https://zerodha-clone-tau.vercel.app/login";
+				window.location.href = "http://localhost:5173/login";
 			}
 			const { data } = await axios.post(
 				"https://zerodha-clone-backend-ve49.onrender.com",
@@ -48,8 +48,7 @@ const Home = () => {
 						position: "top-right",
 				  })
 				: (removeCookie("token"),
-				  (window.location.href =
-						"https://zerodha-clone-tau.vercel.app/login"));
+				  (window.location.href = "hhttp://localhost:5173/login"));
 		};
 		verifyCookie();
 	}, [cookies, navigate, removeCookie]);

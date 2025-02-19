@@ -20,18 +20,7 @@ const URL = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(
-	cors({
-		origin: [
-			"https://zerodha-clone-tau.vercel.app",
-			"https://zerodha-clonedashboard.vercel.app", // Second frontend
-		],
-		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-		credentials: true,
-		preflightContinue: true,
-		allowedHeaders: ["Content-Type", "Authorization"], // Allow cookies/session sharing
-	})
-);
+app.use(cors());
 
 app.use(bodyParser.json());
 
