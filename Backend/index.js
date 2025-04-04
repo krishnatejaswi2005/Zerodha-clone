@@ -9,11 +9,11 @@ const cors = require("cors");
 
 const bodyParser = require("body-parser");
 
-const { HoldingsModel } = require("../Backend/model/HoldingsModel");
-const { PositionsModel } = require("../Backend/model//PositionsModel");
-const { OrdersModel } = require("../Backend/model/OrdersModel");
+const { HoldingsModel } = require("./model/HoldingsModel");
+const { PositionsModel } = require("./model/PositionsModel");
+const { OrdersModel } = require("./model/OrdersModel");
 
-const User = require("../Backend/model/UserModel");
+const User = require("./model/UserModel");
 
 const PORT = process.env.PORT || 3002;
 const URL = process.env.MONGO_URL;
