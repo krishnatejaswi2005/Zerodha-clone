@@ -14,8 +14,10 @@ module.exports.Signup = async (req, res, next) => {
 		console.log("Token created:", token);
 
 		res.cookie("token", token, {
-			withCredentials: true,
-			httpOnly: false,
+			httpOnly: true, // ✅ Prevents JavaScript access
+			secure: true, // ✅ Ensures HTTPS only (important for Render/Vercel)
+			sameSite: "None", // ✅ Required for cross-site requests
+			maxAge: 24 * 60 * 60 * 1000, // Optional: 1 day
 		});
 		res
 			.status(201)
@@ -42,8 +44,10 @@ module.exports.Login = async (req, res, next) => {
 		}
 		const token = createSecretToken(user._id);
 		res.cookie("token", token, {
-			withCredentials: true,
-			httpOnly: false,
+			httpOnly: true, // ✅ Prevents JavaScript access
+			secure: true, // ✅ Ensures HTTPS only (important for Render/Vercel)
+			sameSite: "None", // ✅ Required for cross-site requests
+			maxAge: 24 * 60 * 60 * 1000, // Optional: 1 day
 		});
 		res
 			.status(201)
