@@ -10,7 +10,7 @@ const Positions = () => {
 	const [allPositions, setAllPositions] = useState([]);
 	useEffect(() => {
 		axios
-			.get("https://zerodha-clone-backend-ve49.onrender.com/getPositions")
+			.get("https://zerodha-clone-production.up.railway.app/getPositions")
 			.then((res) => {
 				setAllPositions(res.data);
 			});

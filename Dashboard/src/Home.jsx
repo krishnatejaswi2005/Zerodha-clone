@@ -24,7 +24,7 @@ const Home = () => {
 	useEffect(() => {
 		axios
 			.get(
-				`https://zerodha-clone-backend-ve49.onrender.com/getUsername/${decodedToken.id}`
+				`https://zerodha-clone-production.up.railway.app/getUsername/${decodedToken.id}`
 			)
 			.then((result) => {
 				setUsername(result.data.username);
@@ -37,7 +37,7 @@ const Home = () => {
 				window.location.href = "http://localhost:5173/login";
 			}
 			const { data } = await axios.post(
-				"https://zerodha-clone-backend-ve49.onrender.com",
+				"https://zerodha-clone-production.up.railway.app",
 				{},
 				{ withCredentials: true }
 			);
