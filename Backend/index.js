@@ -20,7 +20,10 @@ const URL = process.env.MONGO_URL;
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+const allowedOrigins = [
+	"https://zerodha-clone-tau.vercel.app",
+	"http://localhost:5174",
+];
 
 app.use(
 	cors({

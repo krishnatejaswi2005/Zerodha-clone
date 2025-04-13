@@ -24,8 +24,22 @@ const Home = () => {
 		const tokenFromUrl = urlParams.get("token");
 		const userFromUrl = urlParams.get("user");
 
+		console.log("=== Cookie Setting Debug ===");
+		console.log("1. URL Parameters:", {
+			tokenFromUrl: tokenFromUrl ? "Present" : "Missing",
+			userFromUrl: userFromUrl ? "Present" : "Missing",
+		});
+		console.log("2. Current cookies:", cookies);
+		console.log("3. Token cookie exists:", !!cookies.token);
+
 		if (tokenFromUrl && !cookies.token) {
-			console.log("Setting new token cookie");
+			console.log("4. Setting new token cookie with params:", {
+				path: "/",
+				maxAge: 24 * 60 * 60,
+				sameSite: "lax",
+				httpOnly: false,
+				secure: false,
+			});
 			setCookie("token", tokenFromUrl, {
 				path: "/",
 				maxAge: 24 * 60 * 60, // 24 hours
@@ -33,7 +47,14 @@ const Home = () => {
 				httpOnly: false,
 				secure: false,
 			});
+			console.log("5. Cookie set successfully");
 			setUsername(userFromUrl);
+			console.log("6. Username set to:", userFromUrl);
+		} else {
+			console.log(
+				"7. Cookie setting skipped because:",
+				!tokenFromUrl ? "No token in URL" : "Token cookie already exists"
+			);
 		}
 	}, []); // Only run once on mount
 
@@ -41,7 +62,7 @@ const Home = () => {
 	useEffect(() => {
 		const verifyAndSetup = async () => {
 			if (!cookies.token) {
-				// window.location.href = "http://localhost:5173/login";
+				// window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 				return;
 			}
 
@@ -53,8 +74,8 @@ const Home = () => {
 				);
 
 				if (!data || data.status !== true) {
-					removeCookie("token");
-					window.location.href = "http://localhost:5173/login";
+					// removeCookie("token");
+					// window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 					return;
 				}
 
@@ -68,7 +89,7 @@ const Home = () => {
 			} catch (error) {
 				console.error("Error during verification:", error);
 				removeCookie("token");
-				window.location.href = "http://localhost:5173/login";
+				window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 			}
 		};
 

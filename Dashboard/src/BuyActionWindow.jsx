@@ -52,7 +52,7 @@ const BuyActionWindow = ({ uid }) => {
 			if (!token) {
 				setError("Authentication required. Please login again.");
 				console.error("No token found in cookies");
-				window.location.href = "http://localhost:5173/login";
+				window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 				return;
 			}
 
@@ -64,7 +64,7 @@ const BuyActionWindow = ({ uid }) => {
 			if (!userId) {
 				setError("Invalid session. Please login again.");
 				console.error("No userId found in token");
-				window.location.href = "http://localhost:5173/login";
+				window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 				return;
 			}
 
@@ -114,12 +114,13 @@ const BuyActionWindow = ({ uid }) => {
 			if (error.response) {
 				switch (error.response.status) {
 					case 401:
-						window.location.href = "http://localhost:5173/login";
+						window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 						break;
 					case 500:
 						if (error.response.data?.error?.includes("userId")) {
 							setError("Session expired. Please login again.");
-							window.location.href = "http://localhost:5173/login";
+							window.location.href =
+								"https://zerodha-clone-tau.vercel.app/login";
 						} else {
 							setError("Server error. Please try again later.");
 						}
