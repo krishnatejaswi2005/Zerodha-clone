@@ -33,7 +33,7 @@ const Home = () => {
 		console.log("2. Current cookies:", cookies);
 		console.log("3. Token cookie exists:", !!cookies.token);
 
-		if (tokenFromUrl && !cookies.token) {
+		if (tokenFromUrl) {
 			console.log("4. Setting new token cookie with params:", {
 				path: "/",
 				maxAge: 24 * 60 * 60,
