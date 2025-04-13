@@ -64,6 +64,8 @@ A comprehensive full-stack clone of the Zerodha Kite trading platform, designed 
 * Dashboard updates with holdings, order history (planned)
 * **Session tokens** are stored in cookies until logout
 
+---
+
 ## 📊 Data Visualization
 
 * **Holdings Section**:
@@ -144,6 +146,8 @@ npm install
 npm run dev
 ```
 
+---
+
 ## ☁️ Deployment
 
     Frontend:
@@ -152,6 +156,8 @@ npm run dev
     Backend:
         Deployed on Render or Railway
         → Ensure the server is connected with MongoDB Atlas and serving APIs
+
+---
 
 ## 🔮 Future Improvements
 
