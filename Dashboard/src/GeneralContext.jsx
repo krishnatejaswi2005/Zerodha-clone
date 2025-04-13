@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import BuyActionWindow from "./BuyActionWindow";
 import SellActionWindow from "./SellActionWindow";
@@ -15,24 +15,25 @@ export const GeneralContextProvider = (props) => {
 	const [isSellWindowOpen, setIsSellWindowOpen] = useState(false);
 	const [selectedStockUID, setSelectedStockUID] = useState("");
 
-	const handleOpenBuyWindow = (uid) => {
+	const handleOpenBuyWindow = useCallback((uid) => {
 		setIsBuyWindowOpen(true);
 		setSelectedStockUID(uid);
-	};
+	}, []);
 
-	const handleCloseBuyWindow = () => {
+	const handleCloseBuyWindow = useCallback(() => {
 		setIsBuyWindowOpen(false);
 		setSelectedStockUID("");
-	};
-	const handleOpenSellWindow = (uid) => {
+	}, []);
+
+	const handleOpenSellWindow = useCallback((uid) => {
 		setIsSellWindowOpen(true);
 		setSelectedStockUID(uid);
-	};
+	}, []);
 
-	const handleCloseSellWindow = () => {
+	const handleCloseSellWindow = useCallback(() => {
 		setIsSellWindowOpen(false);
 		setSelectedStockUID("");
-	};
+	}, []);
 
 	return (
 		<GeneralContext.Provider

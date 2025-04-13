@@ -56,55 +56,52 @@ const BuyActionWindow = ({ uid }) => {
 				return;
 			}
 
-			try {
-				const decodedToken = jwtDecode(token);
-				console.log("Decoded token:", decodedToken);
-				const userId = decodedToken?.id;
-				console.log("Extracted userId:", userId);
+			const decodedToken = jwtDecode(token);
+			console.log("Decoded token:", decodedToken);
+			const userId = decodedToken?.id;
+			console.log("Extracted userId:", userId);
 
-				if (!userId) {
-					setError("Invalid session. Please login again.");
-					console.error("No userId found in token");
-					window.location.href = "http://localhost:5173/login";
-					return;
-				}
+			if (!userId) {
+				setError("Invalid session. Please login again.");
+				console.error("No userId found in token");
+				window.location.href = "http://localhost:5173/login";
+				return;
+			}
 
-				console.log("Sending request with data:", {
+			console.log("Sending request with data:", {
+				name: uid,
+				qty: quantity,
+				price: price,
+				mode: "BUY",
+				userId: userId,
+			});
+
+			const response = await axios.post(
+				"http://localhost:3002/newOrder",
+				{
 					name: uid,
 					qty: quantity,
 					price: price,
 					mode: "BUY",
 					userId: userId,
-				});
-
-				const response = await axios.post(
-					"http://localhost:3002/newOrder",
-					{
-						name: uid,
-						qty: quantity,
-						price: price,
-						mode: "BUY",
-						userId: userId,
+				},
+				{
+					withCredentials: true,
+					headers: {
+						"Content-Type": "application/json",
 					},
-					{
-						withCredentials: true,
-						headers: {
-							"Content-Type": "application/json",
-						},
-					}
-				);
-
-				if (response.data && response.data.success) {
-					console.log("Order placed successfully:", response.data);
-					closeBuyWindow();
-				} else {
-					setError(response.data?.message || "Failed to place order");
 				}
-			} catch (decodeError) {
-				console.error("Token decode error:", decodeError);
-				setError("Invalid token format. Please login again.");
-				window.location.href = "http://localhost:5173/login";
-				return;
+			);
+
+			if (response.data && response.data.success) {
+				console.log("Order placed successfully:", response.data);
+				// Clear the form inputs
+				// setStockQuantity("");
+				// setStockPrice("");
+				// Close the window
+			} else {
+				setError(response.data?.message || "Failed to place order");
+				closeBuyWindow();
 			}
 		} catch (error) {
 			console.error("Order placement failed:", {
@@ -147,11 +144,12 @@ const BuyActionWindow = ({ uid }) => {
 	};
 
 	return (
-		<div className="floating-window-overlay">
+		<div className="floating-window-overlay" onClick={handleCancelClick}>
 			<div
 				className="container container-responsive floating-window"
 				id="buy-window"
 				draggable="true"
+				onClick={(e) => e.stopPropagation()}
 			>
 				<div className="regular-order inputs-responsive">
 					<div className="inputs">
