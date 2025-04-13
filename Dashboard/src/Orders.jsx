@@ -24,7 +24,9 @@ const Orders = () => {
 		try {
 			const decodedToken = jwtDecode(cookies.token);
 			axios
-				.get(`http://localhost:3002/getOrders?userId=${decodedToken.id}`)
+				.get(
+					`https://zerodha-clone-backend-ve49.onrender.com/getOrders?userId=${decodedToken.id}`
+				)
 				.then((res) => {
 					setAllOrders(res.data);
 				})

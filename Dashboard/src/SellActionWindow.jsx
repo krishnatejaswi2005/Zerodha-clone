@@ -23,13 +23,16 @@ const SellActionWindow = ({ uid }) => {
 
 	const handleSellClick = async () => {
 		try {
-			await axios.post("http://localhost:3002/newOrder", {
-				name: uid,
-				qty: stockQuantity,
-				price: stockPrice,
-				mode: "SELL",
-				userId: decodedToken.id,
-			});
+			await axios.post(
+				"https://zerodha-clone-backend-ve49.onrender.com/newOrder",
+				{
+					name: uid,
+					qty: stockQuantity,
+					price: stockPrice,
+					mode: "SELL",
+					userId: decodedToken.id,
+				}
+			);
 		} catch (error) {
 			console.error("Error placing order:", error);
 		}
