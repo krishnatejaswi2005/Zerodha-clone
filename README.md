@@ -119,7 +119,7 @@ cd Zerodha-clone
 ```
 ### 2. Setup Backend
 ```bash
-cd backend
+cd Backend
 npm install
 ```
  Create a .env file in backend/ and add:
@@ -134,14 +134,14 @@ npm start
 ```
 ### 3. Setup Frontend
 ```bash
-cd ../frontend
+cd ../Frontend
 npm install
 npm run dev
 ```
 
 ### 4. Setup Dashboard
 ```bash
-cd ../dashboard
+cd ../Dashboard
 npm install
 npm run dev
 ```
