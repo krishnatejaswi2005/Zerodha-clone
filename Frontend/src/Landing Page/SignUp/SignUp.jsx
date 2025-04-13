@@ -31,6 +31,7 @@ const Signup = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		console.log("Signup form submitted with values:", inputValue);
 		try {
 			const { data } = await axios.post(
 				"https://zerodha-clone-backend-ve49.onrender.com/signup",
@@ -39,17 +40,28 @@ const Signup = () => {
 				},
 				{ withCredentials: true }
 			);
+			console.log("Backend response:", data);
 			const { success, message, token, user } = data;
+			console.log("Destructured response:", { success, message, token, user });
+
 			if (success) {
 				handleSuccess(message);
+				const redirectUrl = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${encodeURIComponent(
+					JSON.stringify(user)
+				)}`;
+				console.log("Redirecting to:", redirectUrl);
 				setTimeout(() => {
-					window.location.href = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${user}`;
+					window.location.href = redirectUrl;
 				}, 1000);
 			} else {
 				handleError(message);
 			}
 		} catch (error) {
-			console.log(error);
+			console.error("Signup error:", error);
+			if (error.response) {
+				console.error("Error response data:", error.response.data);
+				console.error("Error response status:", error.response.status);
+			}
 		}
 		setInputValue({
 			...inputValue,
