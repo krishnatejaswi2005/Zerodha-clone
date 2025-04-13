@@ -16,7 +16,6 @@ const Home = () => {
 	const location = useLocation();
 	const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 	const [username, setUsername] = useState("");
-	const [isLoading, setIsLoading] = useState(true);
 
 	// Handle token from URL only once on mount
 	useEffect(() => {
@@ -29,6 +28,8 @@ const Home = () => {
 			tokenFromUrl: tokenFromUrl ? "Present" : "Missing",
 			userFromUrl: userFromUrl ? "Present" : "Missing",
 		});
+		console.log("1a. Token from URL:", tokenFromUrl);
+
 		console.log("2. Current cookies:", cookies);
 		console.log("3. Token cookie exists:", !!cookies.token);
 
