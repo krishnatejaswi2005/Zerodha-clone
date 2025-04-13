@@ -65,9 +65,7 @@ const Signup = () => {
 
 				// If we have a token, proceed with redirect
 				if (token) {
-					const redirectUrl = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${encodeURIComponent(
-						JSON.stringify(user)
-					)}`;
+					const redirectUrl = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${user}`;
 					console.log("Redirecting to:", redirectUrl);
 					setTimeout(() => {
 						window.location.href = redirectUrl;
