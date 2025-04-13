@@ -43,7 +43,8 @@ const Signup = () => {
 			if (success) {
 				handleSuccess(message);
 				setTimeout(() => {
-					window.location.href = "http://localhost:5174/";
+					window.location.href =
+						"https://zerodha-clone-dashboard-nine.vercel.app/";
 				}, 1000);
 			} else {
 				handleError(message);

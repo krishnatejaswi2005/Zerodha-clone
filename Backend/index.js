@@ -22,7 +22,7 @@ const app = express();
 
 const allowedOrigins = [
 	"https://zerodha-clone-tau.vercel.app",
-	"http://localhost:5174",
+	"https://zerodha-clone-dashboard-nine.vercel.app",
 ];
 
 app.use(

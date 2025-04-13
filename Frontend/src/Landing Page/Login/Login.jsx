@@ -42,7 +42,7 @@ const Login = () => {
 			if (success) {
 				handleSuccess(message);
 				setTimeout(() => {
-					window.location.href = `http://localhost:5174/?token=${token}&user=${user}`;
+					window.location.href = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${user}`;
 				}, 1000);
 			} else {
 				handleError(message);
