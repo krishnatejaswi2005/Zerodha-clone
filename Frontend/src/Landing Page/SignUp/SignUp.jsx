@@ -38,32 +38,44 @@ const Signup = () => {
 				{
 					...inputValue,
 				},
-				{ withCredentials: true }
+				{
+					withCredentials: true,
+					headers: {
+						"Content-Type": "application/json",
+						Accept: "application/json",
+					},
+				}
 			);
 			console.log("Complete response:", response);
 			console.log("Response headers:", response.headers);
 			console.log("Response data:", response.data);
 
-			const { success, message, token, user } = response.data;
-			console.log("Token from response:", token);
-			console.log("Token type:", typeof token);
+			const { success, message, user } = response.data;
+
+			// Check for token in different locations
+			let token = response.data.token;
+			if (!token && response.headers["authorization"]) {
+				token = response.headers["authorization"].split(" ")[1];
+			}
+
+			console.log("Token found:", token);
 
 			if (success) {
 				handleSuccess(message);
-				// Check if token exists before redirecting
-				if (!token) {
-					console.error("No token received from backend");
-					handleError("Authentication failed - no token received");
-					return;
-				}
 
-				const redirectUrl = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${encodeURIComponent(
-					JSON.stringify(user)
-				)}`;
-				console.log("Redirecting to:", redirectUrl);
-				setTimeout(() => {
-					window.location.href = redirectUrl;
-				}, 1000);
+				// If we have a token, proceed with redirect
+				if (token) {
+					const redirectUrl = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${encodeURIComponent(
+						JSON.stringify(user)
+					)}`;
+					console.log("Redirecting to:", redirectUrl);
+					setTimeout(() => {
+						window.location.href = redirectUrl;
+					}, 1000);
+				} else {
+					console.error("No token found in response");
+					handleError("Authentication failed - no token received");
+				}
 			} else {
 				handleError(message);
 			}
