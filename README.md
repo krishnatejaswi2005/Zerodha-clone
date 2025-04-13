@@ -2,7 +2,7 @@
 
 A comprehensive full-stack clone of the Zerodha Kite trading platform, designed with the MERN stack. This project replicates real-world trading functionality such as user authentication, stock orders, holdings visualization, and a responsive dashboard. It's perfect for showcasing practical skills in backend, frontend, and full-stack integration.
 
->   🚀 **Live Demo**: [https://zerodha-clone-tau.vercel.app/](https://zerodha-clone-tau.vercel.app/)
+>   🚀 **Live Demo**: [https://zerodha-clone-tau.vercel.app/](https://zerodha-clone-tau.vercel.app/) </br>
 >   💻 **GitHub Repo**: [Zerodha Clone](https://github.com/krishnatejaswi2005/Zerodha-clone)
 
 ---
