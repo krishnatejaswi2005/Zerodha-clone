@@ -11,7 +11,6 @@ module.exports.Signup = async (req, res, next) => {
 		}
 		const user = await User.create({ email, password, username, createdAt });
 		const token = createSecretToken(user._id, user.username);
-		console.log("Token created:", token);
 
 		res.cookie("token", token, {
 			httpOnly: false, // ✅ Prevents JavaScript access
@@ -19,14 +18,12 @@ module.exports.Signup = async (req, res, next) => {
 			sameSite: "None", // ✅ Required for cross-site requests
 			maxAge: 24 * 60 * 60 * 1000, // Optional: 1 day
 		});
-		res
-			.status(201)
-			.json({
-				message: "User signed in successfully",
-				success: true,
-				token,
-				user: user.username,
-			});
+		res.status(201).json({
+			message: "User signed in successfully",
+			success: true,
+			token,
+			user: user.username,
+		});
 		next();
 	} catch (error) {
 		console.error(error);

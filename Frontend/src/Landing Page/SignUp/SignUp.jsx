@@ -31,7 +31,7 @@ const Signup = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("Signup form submitted with values:", inputValue);
+		// console.log("Signup form submitted with values:", inputValue);
 		try {
 			const response = await axios.post(
 				"https://zerodha-clone-backend-ve49.onrender.com/signup",
@@ -46,9 +46,9 @@ const Signup = () => {
 					},
 				}
 			);
-			console.log("Complete response:", response);
-			console.log("Response headers:", response.headers);
-			console.log("Response data:", response.data);
+			// console.log("Complete response:", response);
+			// console.log("Response headers:", response.headers);
+			// console.log("Response data:", response.data);
 
 			const { success, message, user } = response.data;
 
@@ -58,7 +58,7 @@ const Signup = () => {
 				token = response.headers["authorization"].split(" ")[1];
 			}
 
-			console.log("Token found:", token);
+			// console.log("Token found:", token);
 
 			if (success) {
 				handleSuccess(message);
@@ -66,12 +66,12 @@ const Signup = () => {
 				// If we have a token, proceed with redirect
 				if (token) {
 					const redirectUrl = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${user}`;
-					console.log("Redirecting to:", redirectUrl);
+					// console.log("Redirecting to:", redirectUrl);
 					setTimeout(() => {
 						window.location.href = redirectUrl;
 					}, 1000);
 				} else {
-					console.error("No token found in response");
+					// console.error("No token found in response");
 					handleError("Authentication failed - no token received");
 				}
 			} else {

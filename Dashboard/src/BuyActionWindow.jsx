@@ -37,33 +37,33 @@ const BuyActionWindow = ({ uid }) => {
 
 		try {
 			// Debug: Log all cookies
-			console.log("All cookies:", document.cookie);
+			// console.log("All cookies:", document.cookie);
 
 			// Get userId from the token
 			const allCookies = document.cookie.split("; ");
-			console.log("Split cookies:", allCookies);
+			// console.log("Split cookies:", allCookies);
 
 			const tokenCookie = allCookies.find((row) => row.startsWith("token="));
-			console.log("Found token cookie:", tokenCookie);
+			// console.log("Found token cookie:", tokenCookie);
 
 			const token = tokenCookie?.split("=")[1];
-			console.log("Extracted token value:", token);
+			// console.log("Extracted token value:", token);
 
 			if (!token) {
 				setError("Authentication required. Please login again.");
-				console.error("No token found in cookies");
+				// console.error("No token found in cookies");
 				window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 				return;
 			}
 
 			const decodedToken = jwtDecode(token);
-			console.log("Decoded token:", decodedToken);
+			// console.log("Decoded token:", decodedToken);
 			const userId = decodedToken?.id;
-			console.log("Extracted userId:", userId);
+			// console.log("Extracted userId:", userId);
 
 			if (!userId) {
 				setError("Invalid session. Please login again.");
-				console.error("No userId found in token");
+				// console.error("No userId found in token");
 				window.location.href = "https://zerodha-clone-tau.vercel.app/login";
 				return;
 			}
@@ -94,7 +94,7 @@ const BuyActionWindow = ({ uid }) => {
 			);
 
 			if (response.data && response.data.success) {
-				console.log("Order placed successfully:", response.data);
+				// console.log("Order placed successfully:", response.data);
 				// Clear the form inputs
 				// setStockQuantity("");
 				// setStockPrice("");

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-import { jwtDecode } from "jwt-decode";
-
 import { useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
@@ -23,24 +21,24 @@ const Home = () => {
 		const tokenFromUrl = urlParams.get("token");
 		const userFromUrl = urlParams.get("user");
 
-		console.log("=== Cookie Setting Debug ===");
-		console.log("1. URL Parameters:", {
-			tokenFromUrl: tokenFromUrl ? "Present" : "Missing",
-			userFromUrl: userFromUrl ? "Present" : "Missing",
-		});
-		console.log("1a. Token from URL:", tokenFromUrl);
+		// console.log("=== Cookie Setting Debug ===");
+		// console.log("1. URL Parameters:", {
+		// 	tokenFromUrl: tokenFromUrl ? "Present" : "Missing",
+		// 	userFromUrl: userFromUrl ? "Present" : "Missing",
+		// });
+		// console.log("1a. Token from URL:", tokenFromUrl);
 
-		console.log("2. Current cookies:", cookies);
-		console.log("3. Token cookie exists:", !!cookies.token);
+		// console.log("2. Current cookies:", cookies);
+		// console.log("3. Token cookie exists:", !!cookies.token);
 
 		if (tokenFromUrl) {
-			console.log("4. Setting new token cookie with params:", {
-				path: "/",
-				maxAge: 24 * 60 * 60,
-				sameSite: "lax",
-				httpOnly: false,
-				secure: false,
-			});
+			// console.log("4. Setting new token cookie with params:", {
+			// 	path: "/",
+			// 	maxAge: 24 * 60 * 60,
+			// 	sameSite: "lax",
+			// 	httpOnly: false,
+			// 	secure: false,
+			// });
 			setCookie("token", tokenFromUrl, {
 				path: "/",
 				maxAge: 24 * 60 * 60, // 24 hours
@@ -48,14 +46,14 @@ const Home = () => {
 				httpOnly: false,
 				secure: false,
 			});
-			console.log("5. Cookie set successfully");
+			// console.log("5. Cookie set successfully");
 			setUsername(userFromUrl);
-			console.log("6. Username set to:", userFromUrl);
+			// console.log("6. Username set to:", userFromUrl);
 		} else {
-			console.log(
-				"7. Cookie setting skipped because:",
-				!tokenFromUrl ? "No token in URL" : "Token cookie already exists"
-			);
+			// console.log(
+			// 	"7. Cookie setting skipped because:",
+			// 	!tokenFromUrl ? "No token in URL" : "Token cookie already exists"
+			// );
 		}
 	}, []); // Only run once on mount
 

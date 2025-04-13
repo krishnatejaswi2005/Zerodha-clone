@@ -37,7 +37,7 @@ const Login = () => {
 				},
 				{ withCredentials: true }
 			);
-			console.log(data);
+			// console.log(data);
 			const { success, message, token, user } = data;
 			if (success) {
 				handleSuccess(message);
