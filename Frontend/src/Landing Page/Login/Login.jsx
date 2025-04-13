@@ -31,18 +31,18 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			const { data } = await axios.post(
-				"https://zerodha-clone-production.up.railway.app/login",
+				"http://localhost:3002/login",
 				{
 					...inputValue,
 				},
 				{ withCredentials: true }
 			);
 			console.log(data);
-			const { success, message } = data;
+			const { success, message, token, user } = data;
 			if (success) {
 				handleSuccess(message);
 				setTimeout(() => {
-					window.location.href = "http://localhost:5174/";
+					window.location.href = `http://localhost:5174/?token=${token}&user=${user}`;
 				}, 1000);
 			} else {
 				handleError(message);

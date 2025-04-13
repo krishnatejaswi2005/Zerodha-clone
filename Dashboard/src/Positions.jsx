@@ -9,11 +9,9 @@ const Positions = () => {
 
 	const [allPositions, setAllPositions] = useState([]);
 	useEffect(() => {
-		axios
-			.get("https://zerodha-clone-production.up.railway.app/getPositions")
-			.then((res) => {
-				setAllPositions(res.data);
-			});
+		axios.get("http://localhost:3002/getPositions").then((res) => {
+			setAllPositions(res.data);
+		});
 	}, []);
 
 	return (

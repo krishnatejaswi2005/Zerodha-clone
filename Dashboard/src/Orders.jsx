@@ -12,19 +12,45 @@ const Orders = () => {
 	axios.defaults.withCredentials = true;
 
 	const [cookies, removeCookie] = useCookies(["token"]);
-	const token = cookies.token;
-	const decodedToken = jwtDecode(token, { complete: true });
-
 	const [allOrders, setAllOrders] = useState([]);
+	const [error, setError] = useState(null);
+
 	useEffect(() => {
-		axios
-			.get(
-				`https://zerodha-clone-production.up.railway.app/getOrders?userId=${decodedToken.id}`
-			)
-			.then((res) => {
-				setAllOrders(res.data);
-			});
-	}, []);
+		if (!cookies.token) {
+			setError("No token found. Please login again.");
+			return;
+		}
+
+		try {
+			const decodedToken = jwtDecode(cookies.token);
+			axios
+				.get(`http://localhost:3002/getOrders?userId=${decodedToken.id}`)
+				.then((res) => {
+					setAllOrders(res.data);
+				})
+				.catch((err) => {
+					setError("Failed to fetch orders. Please try again later.");
+					console.error("Error fetching orders:", err);
+				});
+		} catch (err) {
+			setError("Invalid token. Please login again.");
+			console.error("Token decoding error:", err);
+		}
+	}, [cookies.token]);
+
+	if (error) {
+		return (
+			<div className="orders orders-responsive">
+				<div className="no-orders no-orders-responsive">
+					<p className="no-orders-text">{error}</p>
+					<Link to={"/login"} className="btn btn-responsive">
+						Login Again
+					</Link>
+				</div>
+			</div>
+		);
+	}
+
 	if (allOrders.length === 0) {
 		return (
 			<div className="orders orders-responsive">
@@ -37,6 +63,7 @@ const Orders = () => {
 			</div>
 		);
 	}
+
 	return (
 		<>
 			<h3 className="title">Orders ({allOrders.length})</h3>

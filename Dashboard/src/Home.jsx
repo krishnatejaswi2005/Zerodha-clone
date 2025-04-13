@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { jwtDecode } from "jwt-decode";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -13,50 +13,77 @@ import TopBar from "./TopBar";
 const Home = () => {
 	axios.defaults.withCredentials = true;
 
-	const navigate = useNavigate();
-	const [cookies, removeCookie] = useCookies(["token"]);
+	const location = useLocation();
+	const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 	const [username, setUsername] = useState("");
+	const [isLoading, setIsLoading] = useState(true);
 
-	const token = cookies.token;
-	console.log(token);
-	const decodedToken = jwtDecode(token, { complete: true });
-
+	// Handle token from URL only once on mount
 	useEffect(() => {
-		axios
-			.get(
-				`https://zerodha-clone-production.up.railway.app/getUsername/${decodedToken.id}`
-			)
-			.then((result) => {
-				setUsername(result.data.username);
+		const urlParams = new URLSearchParams(location.search);
+		const tokenFromUrl = urlParams.get("token");
+		const userFromUrl = urlParams.get("user");
+
+		if (tokenFromUrl && !cookies.token) {
+			console.log("Setting new token cookie");
+			setCookie("token", tokenFromUrl, {
+				path: "/",
+				maxAge: 24 * 60 * 60, // 24 hours
+				sameSite: "lax",
+				httpOnly: false,
+				secure: false,
 			});
-	}, []);
+			setUsername(userFromUrl);
+		}
+	}, []); // Only run once on mount
 
+	// Handle verification separately
 	useEffect(() => {
-		const verifyCookie = async () => {
+		const verifyAndSetup = async () => {
 			if (!cookies.token) {
+				// window.location.href = "http://localhost:5173/login";
+				return;
+			}
+
+			try {
+				const { data } = await axios.post(
+					"http://localhost:3002",
+					{},
+					{ withCredentials: true }
+				);
+
+				if (!data || data.status !== true) {
+					removeCookie("token");
+					window.location.href = "http://localhost:5173/login";
+					return;
+				}
+
+				setUsername(data.user);
+				if (!username) {
+					toast(`Hello ${data.user}`, {
+						position: "top-right",
+					});
+				}
+				setIsLoading(false);
+			} catch (error) {
+				console.error("Error during verification:", error);
+				removeCookie("token");
 				window.location.href = "http://localhost:5173/login";
 			}
-			const { data } = await axios.post(
-				"https://zerodha-clone-production.up.railway.app",
-				{},
-				{ withCredentials: true }
-			);
-			const { status, user } = data;
-			setUsername(user);
-			return status
-				? toast(`Hello ${user}`, {
-						position: "top-right",
-				  })
-				: (removeCookie("token"),
-				  (window.location.href = "hhttp://localhost:5173/login"));
 		};
-		verifyCookie();
-	}, [cookies, navigate, removeCookie]);
+
+		verifyAndSetup();
+	}, [cookies.token]);
+
+	// if (isLoading) {
+	// 	return <div>Loading...</div>;
+	// }
 
 	return (
 		<>
 			<TopBar username={username} />
 			<Dashboard username={username} />
+			<ToastContainer />
 		</>
 	);
 };

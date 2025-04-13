@@ -14,8 +14,8 @@ module.exports.Signup = async (req, res, next) => {
 		console.log("Token created:", token);
 
 		res.cookie("token", token, {
-			httpOnly: true, // ✅ Prevents JavaScript access
-			secure: true, // ✅ Ensures HTTPS only (important for Render/Vercel)
+			httpOnly: false, // ✅ Prevents JavaScript access
+			secure: false, // ✅ Ensures HTTPS only (important for Render/Vercel)
 			sameSite: "None", // ✅ Required for cross-site requests
 			maxAge: 24 * 60 * 60 * 1000, // Optional: 1 day
 		});
@@ -43,15 +43,12 @@ module.exports.Login = async (req, res, next) => {
 			return res.json({ message: "Incorrect password or email" });
 		}
 		const token = createSecretToken(user._id);
-		res.cookie("token", token, {
-			httpOnly: true, // ✅ Prevents JavaScript access
-			secure: true, // ✅ Ensures HTTPS only (important for Render/Vercel)
-			sameSite: "None", // ✅ Required for cross-site requests
-			maxAge: 24 * 60 * 60 * 1000, // Optional: 1 day
+		res.status(201).json({
+			message: "User logged in successfully",
+			success: true,
+			token,
+			user: user.username,
 		});
-		res
-			.status(201)
-			.json({ message: "User logged in successfully", success: true });
 		next();
 	} catch (error) {
 		console.error(error);

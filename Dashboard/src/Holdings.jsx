@@ -23,11 +23,9 @@ const Holdings = () => {
 	};
 
 	useEffect(() => {
-		axios
-			.get("https://zerodha-clone-production.up.railway.app/getHoldings")
-			.then((res) => {
-				setAllHoldings(res.data);
-			});
+		axios.get("http://localhost:3002/getHoldings").then((res) => {
+			setAllHoldings(res.data);
+		});
 	}, []);
 	return (
 		<>
