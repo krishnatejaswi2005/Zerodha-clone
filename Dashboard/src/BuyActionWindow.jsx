@@ -68,13 +68,13 @@ const BuyActionWindow = ({ uid }) => {
 				return;
 			}
 
-			console.log("Sending request with data:", {
-				name: uid,
-				qty: quantity,
-				price: price,
-				mode: "BUY",
-				userId: userId,
-			});
+			// console.log("Sending request with data:", {
+			// 	name: uid,
+			// 	qty: quantity,
+			// 	price: price,
+			// 	mode: "BUY",
+			// 	userId: userId,
+			// });
 
 			const response = await axios.post(
 				"https://zerodha-clone-backend-ve49.onrender.com/newOrder",
