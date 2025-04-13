@@ -39,12 +39,11 @@ const Signup = () => {
 				},
 				{ withCredentials: true }
 			);
-			const { success, message } = data;
+			const { success, message, token, user } = data;
 			if (success) {
 				handleSuccess(message);
 				setTimeout(() => {
-					window.location.href =
-						"https://zerodha-clone-dashboard-nine.vercel.app/";
+					window.location.href = `https://zerodha-clone-dashboard-nine.vercel.app/?token=${token}&user=${user}`;
 				}, 1000);
 			} else {
 				handleError(message);
