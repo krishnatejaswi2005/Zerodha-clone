@@ -114,7 +114,7 @@ While building this project, I gained hands-on experience with:
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/krishnatejaswi2005/Zerodha-clone.git](https://github.com/krishnatejaswi2005/Zerodha-clone.git)
+git clone https://github.com/krishnatejaswi2005/Zerodha-clone.git
 cd Zerodha-clone
 ```
 ### 2. Setup Backend
